@@ -56,9 +56,9 @@ $(window).resize(function(){
 
 var lastinput;
 
-var databaseSurvival = JSON.parse(JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getSurv/mut",datatype:'json',success:function(data){}}).responseText));
+var databaseSurvival = JSON.parse(JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSurv/mut",datatype:'json',success:function(data){}}).responseText));
 var stratas = databaseSurvival.data.map(x=>{return x[8]}).filter((x,i)=>{return databaseSurvival.data.map(x=>{return x[databaseSurvival.columns.indexOf('strata')]}).indexOf(x)==i});
-var databaseSample = JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getExpSampleList",datatype:'json',success:function(data){}}).responseText);
+var databaseSample = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getExpSampleList",datatype:'json',success:function(data){}}).responseText);
 
 function clearUpload(){
     vueObj.upload_prefix = '';
@@ -70,7 +70,7 @@ function pri_init(){
     $('#pri_input').fileinput({
         showPreview: false,
         showUpload: false,
-        uploadUrl: '/pmht/postFile_predict_pri',
+        uploadUrl: '/dapp/pmht/postFile_predict_pri',
     });
     $("#pri_input").on("filebatchselected", function(event, files) {
         $("#pri_input").fileinput("upload");
@@ -119,7 +119,7 @@ function updatePriModel(pri_id){
                         success:function(data){
                             if(data.length == 35){
                                 vueObj.modelID   = data;
-                                method    = JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getSelect/"+data,datatype:'json',success:function(data){}}).responseText);
+                                method    = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSelect/"+data,datatype:'json',success:function(data){}}).responseText);
                                 if(typeof(method.info.select) != 'undefined'){
                                     vueObj.method = method.info.select.filter((x)=>{return x.key=='Autogluon'})[0]
                                 }
@@ -402,7 +402,7 @@ function loadSample(sample){
 }
 
 $('#main').load('ts/predict.html', function(){
-    mutgene     = JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getMutSelect/pre",datatype:'json',success:function(data){}}).responseText);
+    mutgene     = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getMutSelect/pre",datatype:'json',success:function(data){}}).responseText);
     var jobhis = [];
     app_main=Vue.createApp({
         data(){
@@ -679,8 +679,8 @@ $('#main').load('ts/predict.html', function(){
                 if(input != ''){
                     this.expName = input;
                     this.expLoadState = 'loading';
-                    var factor_showlist = JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getExpSelect/default",datatype:'json',success:function(data){}}).responseText);
-                    var factor_load = JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getExpSelect/"+input,datatype:'json',success:function(data){}}).responseText);
+                    var factor_showlist = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getExpSelect/default",datatype:'json',success:function(data){}}).responseText);
+                    var factor_load = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getExpSelect/"+input,datatype:'json',success:function(data){}}).responseText);
                     for (var key in factor_showlist) {
                         this.factordef[key] = Math.round(factor_load[key]*10)/10;
                         this.factor[key]    = Math.round(factor_load[key]*10)/10;
@@ -733,7 +733,7 @@ $('#main').load('ts/predict.html', function(){
                     });
                     $('#uploadModal').off('shown.bs.modal').on('shown.bs.modal', function () {
                         $("#input-id").fileinput({
-                            uploadUrl: '/pmht/postFile_predict',
+                            uploadUrl: '/dapp/pmht/postFile_predict',
                             showCaption: false,
                             showBrowse: false,
                             showPreview: true,
@@ -796,7 +796,7 @@ $('#main').load('ts/predict.html', function(){
             // this.demoVS();
             pri_init();
 
-            method    = JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getSelect/"+ this.datatype.select,datatype:'json',success:function(data){}}).responseText);
+            method    = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSelect/"+ this.datatype.select,datatype:'json',success:function(data){}}).responseText);
             if(typeof(method.info.select) != 'undefined'){
                 vueObj.method = method.info.select.filter((x)=>{return x.key=='Autogluon'})[0]
             }else{
@@ -821,7 +821,7 @@ $('#main').load('ts/predict.html', function(){
                             pri_init();
                         }
                     });
-                    method    = JSON.parse($.ajax({async:false,type:"get",url:"/pmht/getSelect/"+val,datatype:'json',success:function(data){}}).responseText);
+                    method    = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSelect/"+val,datatype:'json',success:function(data){}}).responseText);
                     if(typeof(method.info.select) != 'undefined'){
                         vueObj.method = method.info.select.filter((x)=>{return x.key=='Autogluon'})[0]
                     }else{

@@ -43,7 +43,7 @@ function fileinput_init(obj){
     obj.fileinput({
         showPreview: false,
         showUpload: false,
-        uploadUrl: '/pmht/postFile',
+        uploadUrl: '/dapp/pmht/postFile',
     });
     obj.on("filebatchselected", function(event, files) {
         obj.fileinput("upload");
