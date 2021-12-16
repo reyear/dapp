@@ -1,0 +1,53 @@
+{
+    "status": true,
+    "info": {
+        "headtxt": "( 36Month AUC )",
+        "select": [
+            {
+                "key": "Autogluon",
+                "label": "Autogluon (0.779)",
+                "color": true
+            },
+            {
+                "key": "LinearSVM",
+                "label": "LinearSVM (0.767)",
+                "color": true
+            },
+            {
+                "key": "MLPClassifier",
+                "label": "MLPClassifier (0.766)",
+                "color": true
+            },
+            {
+                "key": "RandomForest",
+                "label": "RandomForest (0.765)",
+                "color": true
+            },
+            {
+                "key": "DNN",
+                "label": "DNN (0.764)",
+                "color": true
+            },
+            {
+                "key": "AdaBoost",
+                "label": "AdaBoost (0.753)",
+                "color": true
+            },
+            {
+                "key": "KNeighbors",
+                "label": "KNeighbors (0.731)",
+                "color": false
+            },
+            {
+                "key": "NaiveBayes",
+                "label": "NaiveBayes (0.725)",
+                "color": false
+            },
+            {
+                "key": "DecisionTree",
+                "label": "DecisionTree (0.712)",
+                "color": false
+            }
+        ]
+    }
+}
