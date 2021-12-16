@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap-slider.min.css">
+<link rel="stylesheet" href="css/bootstrap-table.min.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/fileinput.min.css">
+<link rel="stylesheet" href="css/bootstrap-icons.min.css">
+
+<script src="js/vue.global.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-slider.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/fileinput.min.js"></script>
+<script>
+var key        = "e8c93c4c91a74db2de422efb512ddf1e";
+var history_Id = "df7a1f0c02a5b08e";
+var app_main;
+var lock=0;
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="header">
+            <h3><span class="title_first">DAPP</span><span class="title_second">De novo AML Prognostic Prediction</span></h3>
+        </div>
+        <ul class="nav nav-pills" id="nav">
+            <li role="presentation" v-for="x in nav" :class="{'active': x.title==idx}" :id="x.title" >
+            <a :href="'?idx='+x.title">
+            <!-- <a @click="updateidx(x.title);"> -->
+            <strong>{{x.title}}</strong></a></li>
+        </ul>
+        <div id="main_box">
+            <div id="main">
+                <div id="box"></div>
+            </div>
+            <div class="mask" style="padding-top:0px; margin-top:100px; color:#333;">Loading ...</div>
+        </div>
+        <div id="script"></div>
+    </div>
+</div>
+
+<script>
+var idx = 'Home';
+if(getQueryVariable('idx')){
+    idx = getQueryVariable('idx');
+}
+
+function getQueryVariable(variable)
+{
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+    }
+    return(false);
+}
+
+function goLoad(x){
+    var tt="\<script src=" + x  + "\>\<\/script\>";
+    if(typeof app_main != 'undefined'){
+        app_main.unmount(); 
+    }
+
+    $('#main_box>.mask').css('display', 'block');
+
+    $('#main').fadeOut(100, function(){
+        $('#script').html(tt);
+        $('#main').fadeIn(100);
+        $('#main_box>.mask').css('display', 'none');
+        lock=0;
+    });
+}
+
+nav_v3 = Vue.createApp({
+    data(){
+        return {
+            idx: '',
+            nav: [
+                {'title': 'Home',           'path': 'ts/home.js'},
+                {'title': 'Predict',        'path': 'ts/predict.js'},
+                {'title': 'Train',          'path': 'ts/train.js'},
+                {'title': 'Download',       'path': 'ts/download.js'},
+                {'title': 'Document',       'path': 'ts/document.js'},
+                {'title': 'Contact',        'path': 'ts/contact.js'},
+            ],
+        }
+    },
+    methods:{
+        updateidx(x){
+            console.log(x);
+            if(this.idx!=x){
+                if(lock==0){
+                    lock=1;
+                    this.idx=x;
+                    path = this.nav.filter( xx=>{return xx.title == x} ).map(xx=>{return xx.path})[0];
+                    goLoad(path);
+                }else{
+                    console.log('skip');
+                }
+            }
+        }
+    },
+    mounted(){
+        this.updateidx(idx);
+    }
+});
+
+nav_v3.mount('#nav');
+</script>
+
