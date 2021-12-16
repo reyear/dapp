@@ -173,36 +173,36 @@ h4 a:focus, h4 a:hover {
 }
 
 .res_prog-up.res_prog-d{
-    background-image: url('/images/hm_d.jpg');
+    background-image: url('/dapp/images/hm_d.jpg');
     background-position:right top;
     height: 15px;
     border-bottom: 1px solid #FFF;
 }
 .res_prog-dn.res_prog-d{
-    background-image: url('/images/hm_d.jpg');
+    background-image: url('/dapp/images/hm_d.jpg');
     background-position:right bottom;
     height: 15px;
     border-top: 1px solid #FFF;
 }
 .res_prog-up.res_prog-l{
-    background-image: url('/images/hm_b.jpg');
+    background-image: url('/dapp/images/hm_b.jpg');
     background-position:left top;
     height: 15px;
     border-bottom: 1px solid #FFF;
 }
 .res_prog-dn.res_prog-l{
-    background-image: url('/images/hm_r.jpg');
+    background-image: url('/dapp/images/hm_r.jpg');
     background-position:left bottom;
     height: 15px;
     border-top: 1px solid #FFF;
 }
 .res_prog-fl.res_prog-l{
-    background-image: url('/images/hm_b.jpg');
+    background-image: url('/dapp/images/hm_b.jpg');
     background-position:left top;
     height: 30px;
 }
 .res_prog-fl.res_prog-d{
-    background-image: url('/images/hm_d.jpg');
+    background-image: url('/dapp/images/hm_d.jpg');
     background-position:right top;
     height: 30px;
 }
@@ -258,7 +258,7 @@ table.res_table>tbody>tr>td, table.res_table>tbody>tr>th
     display: inline-block;
     text-align: right;
     padding-top: 5px;
-    background-image: url('/images/dashed.png');
+    background-image: url('/dapp/images/dashed.png');
     background-repeat: repeat-x;
     background-position-y: center;
 }
@@ -399,7 +399,7 @@ span.highlight{
     font-size:14px;
 }
 #expLoadState.text-danger, .loading_dot{
-    background-image: url(/images/loading_3.gif);
+    background-image: url('/dapp/images/loading_3.gif');
     background-repeat: no-repeat;
     background-position: right center;
     padding-right: 20px;
