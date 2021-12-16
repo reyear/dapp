@@ -1,0 +1,214 @@
+[
+    {
+        "label": "plus21",
+        "select": "absense"
+    },
+    {
+        "label": "del(17)",
+        "select": "absense"
+    },
+    {
+        "label": "plus13",
+        "select": "absense"
+    },
+    {
+        "label": "plus22",
+        "select": "absense"
+    },
+    {
+        "label": "inv(16)",
+        "select": "absense"
+    },
+    {
+        "label": "t(10;11)",
+        "select": "absense"
+    },
+    {
+        "label": "t(9;11)",
+        "select": "absense"
+    },
+    {
+        "label": "t(11;19)",
+        "select": "absense"
+    },
+    {
+        "label": "del(7)",
+        "select": "absense"
+    },
+    {
+        "label": "t(8;21)",
+        "select": "absense"
+    },
+    {
+        "label": "del(9)",
+        "select": "absense"
+    },
+    {
+        "label": "del(5)",
+        "select": "absense"
+    },
+    {
+        "label": "t(6;11)",
+        "select": "absense"
+    },
+    {
+        "label": "inv(3)",
+        "select": "absense"
+    },
+    {
+        "label": "t(9;22)",
+        "select": "absense"
+    },
+    {
+        "label": "t(15;17)",
+        "select": "absense"
+    },
+    {
+        "label": "del(20)",
+        "select": "absense"
+    },
+    {
+        "label": "ASXL1",
+        "select": "absense"
+    },
+    {
+        "label": "IDH1",
+        "select": "absense"
+    },
+    {
+        "label": "RAD21",
+        "select": "absense"
+    },
+    {
+        "label": "IDH2R172",
+        "select": "absense"
+    },
+    {
+        "label": "U2AF1",
+        "select": "absense"
+    },
+    {
+        "label": "JAK2",
+        "select": "absense"
+    },
+    {
+        "label": "MYC",
+        "select": "absense"
+    },
+    {
+        "label": "NRAS",
+        "select": "absense"
+    },
+    {
+        "label": "IKZF1",
+        "select": "absense"
+    },
+    {
+        "label": "KDM6A",
+        "select": "absense"
+    },
+    {
+        "label": "NPM1_863_864",
+        "select": "absense"
+    },
+    {
+        "label": "WT1",
+        "select": "absense"
+    },
+    {
+        "label": "FLT3_other",
+        "select": "absense"
+    },
+    {
+        "label": "DNMT3A",
+        "select": "absense"
+    },
+    {
+        "label": "FLT3_ITD",
+        "select": "absense"
+    },
+    {
+        "label": "RUNX1",
+        "select": "absense"
+    },
+    {
+        "label": "PHF6",
+        "select": "absense"
+    },
+    {
+        "label": "GATA2",
+        "select": "absense"
+    },
+    {
+        "label": "CEBPA",
+        "select": "absense"
+    },
+    {
+        "label": "ETV6",
+        "select": "absense"
+    },
+    {
+        "label": "KRAS",
+        "select": "absense"
+    },
+    {
+        "label": "NPM1_other",
+        "select": "absense"
+    },
+    {
+        "label": "STAG2",
+        "select": "absense"
+    },
+    {
+        "label": "TET2",
+        "select": "absense"
+    },
+    {
+        "label": "IDH2R140",
+        "select": "absense"
+    },
+    {
+        "label": "KMT2D",
+        "select": "absense"
+    },
+    {
+        "label": "SF3B1",
+        "select": "absense"
+    },
+    {
+        "label": "KIT",
+        "select": "absense"
+    },
+    {
+        "label": "CBL",
+        "select": "absense"
+    },
+    {
+        "label": "NF1",
+        "select": "absense"
+    },
+    {
+        "label": "MPL",
+        "select": "absense"
+    },
+    {
+        "label": "BCOR",
+        "select": "absense"
+    },
+    {
+        "label": "SRSF2",
+        "select": "absense"
+    },
+    {
+        "label": "EZH2",
+        "select": "absense"
+    },
+    {
+        "label": "TP53",
+        "select": "absense"
+    },
+    {
+        "label": "PTPN11",
+        "select": "absense"
+    }
+]
