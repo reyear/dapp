@@ -56,9 +56,9 @@ $(window).resize(function(){
 
 var lastinput;
 
-var databaseSurvival = JSON.parse(JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSurv/mut",datatype:'json',success:function(data){}}).responseText));
+var databaseSurvival = JSON.parse(JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getSurv/mut",datatype:'json',success:function(data){}}).responseText));
 var stratas = databaseSurvival.data.map(x=>{return x[8]}).filter((x,i)=>{return databaseSurvival.data.map(x=>{return x[databaseSurvival.columns.indexOf('strata')]}).indexOf(x)==i});
-var databaseSample = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getExpSampleList",datatype:'json',success:function(data){}}).responseText);
+var databaseSample = JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getExpSampleList",datatype:'json',success:function(data){}}).responseText);
 
 function clearUpload(){
     vueObj.upload_prefix = '';
@@ -70,7 +70,7 @@ function pri_init(){
     $('#pri_input').fileinput({
         showPreview: false,
         showUpload: false,
-        uploadUrl: '/dapp/pmht/postFile_predict_pri',
+        uploadUrl: 'http://10.1.13.100:8002/pmht/postFile_predict_pri',
     });
     $("#pri_input").on("filebatchselected", function(event, files) {
         $("#pri_input").fileinput("upload");
@@ -103,7 +103,7 @@ function updatePriModel(pri_id){
     vueObj.modelID='';
     vueObj.method = {};
     console.log("i am going to get model: "+pri_id);
-    url = '/api/jobs/'+ pri_id +'?key=' + key;
+    url = 'http://10.1.13.100:8002/api/jobs/'+ pri_id +'?key=' + key;
     $.ajax(
         {
             type:"get",
@@ -111,7 +111,7 @@ function updatePriModel(pri_id){
             datatype:'json',
             success:function(data){
                 console.log(data);
-                url = "/api/histories/" + history_Id + "/contents/" + data.outputs.outID.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
+                url = "http://10.1.13.100:8002/api/histories/" + history_Id + "/contents/" + data.outputs.outID.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
                 $.ajax(
                     {
                         type:"get",
@@ -119,7 +119,7 @@ function updatePriModel(pri_id){
                         success:function(data){
                             if(data.length == 35){
                                 vueObj.modelID   = data;
-                                method    = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSelect/"+data,datatype:'json',success:function(data){}}).responseText);
+                                method    = JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getSelect/"+data,datatype:'json',success:function(data){}}).responseText);
                                 if(typeof(method.info.select) != 'undefined'){
                                     vueObj.method = method.info.select.filter((x)=>{return x.key=='Autogluon'})[0]
                                 }
@@ -402,7 +402,7 @@ function loadSample(sample){
 }
 
 $('#main').load('ts/predict.html', function(){
-    mutgene     = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getMutSelect/pre",datatype:'json',success:function(data){}}).responseText);
+    mutgene     = JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getMutSelect/pre",datatype:'json',success:function(data){}}).responseText);
     var jobhis = [];
     app_main=Vue.createApp({
         data(){
@@ -494,7 +494,7 @@ $('#main').load('ts/predict.html', function(){
                         this.pri_input_val
                     ].join('|');
                 }
-                url = "/api/tools?key=" + key;
+                url = "http://10.1.13.100:8002/api/tools?key=" + key;
                 data = {'history_id': history_Id, 'inputs':{ 'inf': data_inf }, 'tool_id':'aml_predict'};
                 submit_res  = JSON.parse(
                     $.ajax(
@@ -538,7 +538,7 @@ $('#main').load('ts/predict.html', function(){
                 }
                 this.jobhis = getCookie('jobhis', this.datatype.select);
                 this.jobid = jobid; 
-                url = '/api/jobs/'+jobid+'?key=' + key;
+                url = 'http://10.1.13.100:8002/api/jobs/'+jobid+'?key=' + key;
                 res = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText);
                 if(res.state == 'ok'){
                     res.state = 'done';
@@ -552,16 +552,16 @@ $('#main').load('ts/predict.html', function(){
                         this.job_state = 'error';
                         this.job_end   = formatTimeStr(res.update_time) + ' ( ' + this.job_state  + ' )';
                         // show error
-                        var postResUrl = "/api/datasets/" + res.outputs.postRes.id + "?key=e8c93c4c91a74db2de422efb512ddf1e";
+                        var postResUrl = "http://10.1.13.100:8002/api/datasets/" + res.outputs.postRes.id + "?key=e8c93c4c91a74db2de422efb512ddf1e";
                         _tmp = JSON.parse($.ajax({async:false,type:"get",url:postResUrl,datatype:'json',success:function(data){}}).responseText);
                         $('#res_svg').html("<pre>"+_tmp.misc_info+"</pre>");
                     }else{
                         this.job_end   = formatTimeStr(res.update_time) + ' ( ' + this.job_state  + ' )';
-                        var postResUrl = "/api/histories/" + history_Id + "/contents/" + res.outputs.postRes.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
+                        var postResUrl = "http://10.1.13.100:8002/api/histories/" + history_Id + "/contents/" + res.outputs.postRes.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
                         _tmp = JSON.parse($.ajax({async:false,type:"get",url:postResUrl,datatype:'json',success:function(data){}}).responseText);
                         _tmp.columns = [jobid];
                         survivaldata = _tmp;
-                        url = "/api/histories/" + history_Id + "/contents/" + res.outputs.predict.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
+                        url = "http://10.1.13.100:8002/api/histories/" + history_Id + "/contents/" + res.outputs.predict.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
                         res = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText).out;
                         this.predictTable = res;
                         this.updateHisSummary();
@@ -575,12 +575,12 @@ $('#main').load('ts/predict.html', function(){
                 this.predictTable = [];
                 tmps = [];
                 for(j in jobids.split(',')){
-                    url = '/api/jobs/'+ jobids.split(',')[j] +'?key=' + key;
+                    url = 'http://10.1.13.100:8002/api/jobs/'+ jobids.split(',')[j] +'?key=' + key;
                     res = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText);
-                    url = "/api/histories/" + history_Id + "/contents/" + res.outputs.predict.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
+                    url = "http://10.1.13.100:8002/api/histories/" + history_Id + "/contents/" + res.outputs.predict.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
                     res_table = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText).out;
                     this.predictTable.push(res_table[0]);
-                    url = "/api/histories/" + history_Id + "/contents/" + res.outputs.postRes.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
+                    url = "http://10.1.13.100:8002/api/histories/" + history_Id + "/contents/" + res.outputs.postRes.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
                     res = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText);
                     tmps.push(res);
                     jobhis = getCookie('jobhis', this.datatype.select);
@@ -639,9 +639,9 @@ $('#main').load('ts/predict.html', function(){
             updateHisSummary(){
                 for(var i in this.jobhis){
                     if(!(this.jobhis[i] in this.jobhisSum)){
-                        url = '/api/jobs/'+this.jobhis[i]+'?key=' + key;
+                        url = 'http://10.1.13.100:8002/api/jobs/'+this.jobhis[i]+'?key=' + key;
                         res = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText);
-                        url = "/api/histories/" + history_Id + "/contents/" + res.outputs.workinfo.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
+                        url = "http://10.1.13.100:8002/api/histories/" + history_Id + "/contents/" + res.outputs.workinfo.id + "/display?key=e8c93c4c91a74db2de422efb512ddf1e";
                         $.ajax({
                             async:false,type:"get",url:url,datatype:'json',
                             success: (data)=>{
@@ -679,8 +679,8 @@ $('#main').load('ts/predict.html', function(){
                 if(input != ''){
                     this.expName = input;
                     this.expLoadState = 'loading';
-                    var factor_showlist = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getExpSelect/default",datatype:'json',success:function(data){}}).responseText);
-                    var factor_load = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getExpSelect/"+input,datatype:'json',success:function(data){}}).responseText);
+                    var factor_showlist = JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getExpSelect/default",datatype:'json',success:function(data){}}).responseText);
+                    var factor_load = JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getExpSelect/"+input,datatype:'json',success:function(data){}}).responseText);
                     for (var key in factor_showlist) {
                         this.factordef[key] = Math.round(factor_load[key]*10)/10;
                         this.factor[key]    = Math.round(factor_load[key]*10)/10;
@@ -733,7 +733,7 @@ $('#main').load('ts/predict.html', function(){
                     });
                     $('#uploadModal').off('shown.bs.modal').on('shown.bs.modal', function () {
                         $("#input-id").fileinput({
-                            uploadUrl: '/dapp/pmht/postFile_predict',
+                            uploadUrl: 'http://10.1.13.100:8002/pmht/postFile_predict',
                             showCaption: false,
                             showBrowse: false,
                             showPreview: true,
@@ -796,7 +796,7 @@ $('#main').load('ts/predict.html', function(){
             // this.demoVS();
             pri_init();
 
-            method    = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSelect/"+ this.datatype.select,datatype:'json',success:function(data){}}).responseText);
+            method    = JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getSelect/"+ this.datatype.select,datatype:'json',success:function(data){}}).responseText);
             if(typeof(method.info.select) != 'undefined'){
                 vueObj.method = method.info.select.filter((x)=>{return x.key=='Autogluon'})[0]
             }else{
@@ -821,7 +821,7 @@ $('#main').load('ts/predict.html', function(){
                             pri_init();
                         }
                     });
-                    method    = JSON.parse($.ajax({async:false,type:"get",url:"/dapp/pmht/getSelect/"+val,datatype:'json',success:function(data){}}).responseText);
+                    method    = JSON.parse($.ajax({async:false,type:"get",url:"http://10.1.13.100:8002/pmht/getSelect/"+val,datatype:'json',success:function(data){}}).responseText);
                     if(typeof(method.info.select) != 'undefined'){
                         vueObj.method = method.info.select.filter((x)=>{return x.key=='Autogluon'})[0]
                     }else{

@@ -43,7 +43,7 @@ function fileinput_init(obj){
     obj.fileinput({
         showPreview: false,
         showUpload: false,
-        uploadUrl: '/dapp/pmht/postFile',
+        uploadUrl: 'http://10.1.13.100:8002/pmht/postFile',
     });
     obj.on("filebatchselected", function(event, files) {
         obj.fileinput("upload");
@@ -85,7 +85,7 @@ $('#main').load('ts/train.html',function(){
                 }
             },
             submitModel(){
-                url = "/api/tools?key=" + key;
+                url = "http://10.1.13.100:8002/api/tools?key=" + key;
                 data_inf = this.modeldata_input_val+"|Autogluon|" + this.cutoff_month;
                 data = {'history_id': history_Id, 'inputs':{ 'inf': data_inf }, 'tool_id':'aml_model'};
                 submit_res  = JSON.parse(
@@ -106,7 +106,7 @@ $('#main').load('ts/train.html',function(){
             },
             updateModelRes(jobid){
                 if(jobid!=''){
-                    url = '/api/jobs/'+jobid+'?key=' + key;
+                    url = 'http://10.1.13.100:8002/api/jobs/'+jobid+'?key=' + key;
                     res = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText);
                     if(res.state == 'ok'){
                         res.state = 'done';
@@ -128,14 +128,14 @@ $('#main').load('ts/train.html',function(){
             },
             showModelRes(jobid){
                 this.jobid = jobid;
-                url = '/api/jobs/'+jobid+'?key=' + key;
+                url = 'http://10.1.13.100:8002/api/jobs/'+jobid+'?key=' + key;
                 res = JSON.parse($.ajax({async:false,type:"get",url:url,datatype:'json',success:function(data){}}).responseText);
                 if(
                     typeof res != 'undefined' & 
                     typeof res.outputs.input != 'undefined' &
                     typeof res.outputs.input.id != 'undefined'
                 ){
-                    inputZip_url = '/api/histories/'+ history_Id + '/contents/' + res.outputs.input.id +'/display?key=' + key;
+                    inputZip_url = 'http://10.1.13.100:8002/api/histories/'+ history_Id + '/contents/' + res.outputs.input.id +'/display?key=' + key;
                     this.modelRes.inputZip = inputZip_url;
                 }else{
                     this.modelRes.inputZip = "#not_avaliable";
@@ -146,7 +146,7 @@ $('#main').load('ts/train.html',function(){
                     typeof res.outputs.workinfo != 'undefined' &
                     typeof res.outputs.workinfo.id != 'undefined'
                 ){
-                    wf_url = '/api/histories/'+ history_Id + '/contents/' + res.outputs.workinfo.id +'/display?key=' + key;
+                    wf_url = 'http://10.1.13.100:8002/api/histories/'+ history_Id + '/contents/' + res.outputs.workinfo.id +'/display?key=' + key;
                     rres = JSON.parse($.ajax({async:false,type:"get",url:wf_url,datatype:'json',success:function(data){}}).responseText);
                     console.log(rres);
                     if(typeof rres.out == 'object'){
@@ -167,7 +167,7 @@ $('#main').load('ts/train.html',function(){
                     typeof res.outputs.pic != 'undefined' &
                     typeof res.outputs.pic.id != 'undefined'
                 ){
-                    var _url = '/api/histories/'+ history_Id + '/contents/' + res.outputs.pic.id +'/display?key=' + key;
+                    var _url = 'http://10.1.13.100:8002/api/histories/'+ history_Id + '/contents/' + res.outputs.pic.id +'/display?key=' + key;
                     $('#modelRessvg').load(_url, function(){
                         if(typeof $("#modelRessvg svg").attr("width") != 'undefined'){
                             $("#modelRessvg svg").removeAttr("width");
@@ -185,7 +185,7 @@ $('#main').load('ts/train.html',function(){
                     typeof res.outputs.predict != 'undefined' &
                     typeof res.outputs.predict.id != 'undefined'
                 ){
-                    var _url = '/api/histories/'+ history_Id + '/contents/' + res.outputs.predict.id +'/display?key=' + key;
+                    var _url = 'http://10.1.13.100:8002/api/histories/'+ history_Id + '/contents/' + res.outputs.predict.id +'/display?key=' + key;
                     var rres = JSON.parse($.ajax({async:false,type:"get",url:_url,datatype:'json',success:function(data){}}).responseText);
                     if(typeof rres.out != 'undefined'){
                         this.modelRes.predict = {};
