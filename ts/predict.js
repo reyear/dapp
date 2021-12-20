@@ -232,14 +232,14 @@ function drawSurvival(data, divid="res_svg"){
             {
                 selectedMode: false,
                 data: data.columns,
-                y: '5%', x:'center',
+                y: '7%', x:'center',
                 orient: 'horizontal',
                 align: 'auto',
             },
             {
                 selectedMode: true,
                 data: stratas,
-                y: '10%', x:'right',
+                y: '12%', x:'right',
                 orient: 'vertical',
                 align: 'right',
             },
