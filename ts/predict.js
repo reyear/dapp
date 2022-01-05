@@ -266,7 +266,7 @@ function drawSurvival(data, divid="res_svg"){
             {
                 show: false,
                 type: 'value',
-                min: 6,
+                min: 0,
                 max: 60,
                 gridIndex: 0
             },
