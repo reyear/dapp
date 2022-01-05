@@ -651,6 +651,9 @@ $('#main').load('ts/predict.html', function(){
                                     var inputSum = '...';
                                     if('inputSum' in res){
                                         inputSum = res.inputSum;
+                                        if(inputSum.split('/').length>=3){
+                                            inputSum = inputSum.split('/').slice(0,2).concat(inputSum.split('/').slice(2,).map((x)=>{return x.replace(/\:(\d)/, ':+$1')})).join('/');
+                                        }
                                     }
                                     this.jobhisSum[this.jobhis[i]] = inputSum;
                                 }
